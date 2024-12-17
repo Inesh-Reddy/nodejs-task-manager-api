@@ -5,8 +5,12 @@ const getAllTasks = (req, res)=>{
   res.send('all items from the file')
 }
 const createTasks = async (req, res)=>{
-  const task  = await Task.create(req.body)
-  res.status(201).json({task})
+  try{
+    const task  = await Task.create(req.body)
+    res.status(201).json({task})
+  }catch(err){
+    res.status(500).json({"msg":err.message})
+  }
 }
 const getTasks = (req, res)=>{
   res.send('get single task')
